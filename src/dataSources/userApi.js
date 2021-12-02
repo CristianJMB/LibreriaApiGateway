@@ -9,13 +9,16 @@ class UserAPI extends RESTDataSource {
     }
 
     async createUser(user){
-        user = new Object(JSON,parse(JSON.stringify(user)));
+        user = new Object(JSON.parse(JSON.stringify(user)));
         return await this.post(`/signup/`, user); 
     }
 
     async getUser(idUser){
-        idUser = new Object(JSON.parse(JSON.stringify(idUser)));
-        return await this.get(`/user/${idUser}`);
+        return await this.get(`/user/${idUser}/`);
+    }
+
+    async getUserByUsername(username){
+        return await this.get(`/user/us/${username}/`);
     }
 
     async updateUser(user, idUser){
@@ -27,7 +30,7 @@ class UserAPI extends RESTDataSource {
         return await this.delete(`/user/delete/${idUser}`);
     }
 
-    async login(credentials) {
+    async authRequest(credentials) {
         credentials = new Object(JSON.parse(JSON.stringify(credentials)));
         return await this.post(`/login/`, credentials);
     }
