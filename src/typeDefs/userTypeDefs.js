@@ -15,49 +15,45 @@ const authTypes = gql `
         password: String!
     }
 
-    input signUpPurchaseInput {
+    input signUpInput {
         username: String!
         password: String!
-        name    : String!
+        nombre  : String!
         email   : String!
-        balance : float!
     }
 
-    input signUpRentalInput {
+    input userInput {        
         username: String!
         password: String!
-        name    : String!
+        nombre  : String!
         email   : String!
-        count   : Int!
     }
 
-    input userInput {
-        username: String!
+    input userUpdateInput {
         password: String!
-        nombre    : String!
+        nombre  : String!
         email   : String!
     }
 
     type userDetail {
         id      : Int!
         username: String!
-        password: String!
-        name    : String!
+        nombre  : String!
         email   : String!
+        rol     : String!
     }
 
     extend type Mutation {
-        signUpPurchaseUser(userInput :signUpPurchaseInput)   : Tokens!
-        signUpRentalUser(userInput :signUpRentalInput)       : Tokens!
-        logIn(credentials: credentialsInput!)                : Tokens!
-        refreshToken(refresh: String!)                       : Access!
-        createUser(userInput: userInput!)                    : userDetail  
-        updateUser(userUpdateInput: userInput!, idUser: int!): UserDetail
-        deleteUser(idUser: int!)                             
+        signUpUser  (userInput      : signUpInput)                   : Tokens!
+        logIn       (credentials    : credentialsInput!)             : Tokens!
+        refreshToken(refresh        : String!)                       : Access!
+        createUser  (userInput      : userInput!)                    : userDetail  
+        updateUser  (userUpdateInput: userUpdateInput!, idUser: Int!): userDetail
+        deleteUser  (idUser         : Int!)                          : String                             
     }
 
     extend type Query {
-        userDetailById(idUser: Int!): UserDetail
+        userDetailById(idUser: Int!): userDetail
     }
 `;
 

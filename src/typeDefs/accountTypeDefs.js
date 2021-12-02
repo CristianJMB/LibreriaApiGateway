@@ -3,45 +3,45 @@ const { gql } = require('apollo-server');
 const accountTypes = gql `
     
     type accountPurchase {
-        idUser   : int!
+        idUser   : Int!
         username : String!
         balance  : Float!
     }
     
     type accountRental {
-        idUser   : int!
+        idUser   : Int!
         username : String!
-        count    : int!
+        count    : Int!
     }
     
     input accountPurchaseInput {
-        idUser   : int!
+        idUser   : Int!
         username : String!
         balance  : Float!
     }
     
     input accountRentalInput {
-        idUser   : int!
+        idUser   : Int!
         username : String!
-        count    : int!
+        count    : Int!
     }
 
-    input accountDelete {
-        idUser   : int!
+    input accountPurchaseUpdateInput {
+        balance  : Float!
     }
     
-    extend type Query{
-        accountPurchaseById(idUser: int!): accountPurchase!
-        accountRentalById(idUser: int!)  : accountRental!
+    input accountRentalUpdateInput {
+        count    : Int!
+    }
+
+    type Query{
+        accountPurchaseById(idUser: Int!): accountPurchase!
+        accountRentalById  (idUser: Int!): accountRental!
     }
     
-    extend type Mutation{
-        createAccountPurchase(accountInput: accountPurchaseInput!) accountPurchase
-        createAccountRental(accountInput: accountRentalInput!) accountRental
-        updateAccountPurchase(accountInput: accountPurchaseInput!) accountPurchase
-        updateAccountRental(accountInput: accountRentalInput!) accountRental
-        deleteAccountPurchase(accountDeleteInput: accountDelete!) accountPurchase
-        deleteAccountRental(accountDeleteInput: accountDelete!) accountRental
+    type Mutation{
+        updateAccountPurchase(accountPInput: accountPurchaseUpdateInput!, idUser: Int!): accountPurchase
+        updateAccountRental  (accountRInput: accountRentalUpdateInput!  , idUser: Int!): accountRental
     }  
 `;
 

@@ -3,38 +3,36 @@ const { gql } = require('apollo-server');
 const purchaseBookTypes = gql `
 
     type bookS {
-        idBookS     : int!
+        idBookS     : Int!
         bookCover   : String!
         title       : String!
-        units       : int!
+        units       : Int!
         author      : String!
         description : String!
-        price       : float! 
+        price       : Float! 
     }
     
     input bookSInput {
-        idBookS     : int!
+        idBookS     : Int!
         bookCover   : String!
         title       : String!
-        units       : int!
+        units       : Int!
         author      : String!
         description : String!
-        price       : float!
-    }
-
-    input bookSDeleteInput {
-        idBookS     : int!
+        price       : Float!
     }
 
     extend type Query {
-        bookDetailById(IdBookS: int!)    : bookS
-        bookDetailByTitle(title: String!): bookS
-        booksList()                      : [bookS]  
+        bookSDetailById   (idBookS : Int!   , idUser : Int!): bookS
+        bookSDetailByTitle(title   : String!, idUser : Int!): bookS
+        booksSList        (idUser  : Int!)                  : [bookS]  
     }
 
     extend type Mutation {
-        createBookS(book: bookSInput!)            : bookS!
-        updateBookS(updateBook: bookSInput!)      : bookS!
-        deleteBookS(deleteBook: bookSDeleteInput!)
+        createBookS(book      : bookSInput!, idUser: Int!): bookS
+        updateBookS(updateBook: bookSInput!, idUser: Int!): bookS
+        deleteBookS(idBookS: Int!          , idUser: Int!): String!
     }
 `;
+
+module.exports = purchaseBookTypes;
