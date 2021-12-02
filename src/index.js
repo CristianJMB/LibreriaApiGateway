@@ -5,7 +5,7 @@ const resolvers = require('./resolvers');
 const userAPI = require('./dataSources/userApi');
 const purchaseAPI = require('./dataSources/purchaseApi');
 const rentalAPI = require('./dataSources/rentalApi');
-const authentication = require('./utils/authentication');
+const authentication = require('./utils/authtentication');
 
 const server = new ApolloServer({
     context: authentication,
